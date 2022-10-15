@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import com.bezkoder.springjwt.models.Menu;
+import com.bezkoder.springjwt.payload.response.JwtTokenResponse;
 import com.bezkoder.springjwt.repository.MenuRepository;
+import com.bezkoder.springjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,11 +19,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.bezkoder.springjwt.models.ERole;
 import com.bezkoder.springjwt.models.Role;
@@ -39,6 +37,10 @@ import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
+
+    @Autowired
+    UserService userService;
+
     @Autowired
     AuthenticationManager authenticationManager;
 
@@ -60,22 +62,23 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//
+//        SecurityContextHolder.getContext().setAuthentication(authentication);
+//        String jwt = jwtUtils.generateJwtToken(authentication);
+        JwtTokenResponse jwtTokenResponse = new JwtTokenResponse(userService.generateToken(loginRequest.getUsername(), loginRequest.getPassword()));
+//
+//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+//        List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
+//
+//        Set<Role> userRoles = userRepository.findByUsername(userDetails.getUsername()).get().getRoles();
+//
+//        Set<Menu> menus = new HashSet<>();
+//        for (Role role : userRoles) {
+//            menus.addAll(menuRepository.findAllByRole(role));
+//        }
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        String jwt = jwtUtils.generateJwtToken(authentication);
-
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream().map(item -> item.getAuthority()).collect(Collectors.toList());
-
-        Set<Role> userRoles = userRepository.findByUsername(userDetails.getUsername()).get().getRoles();
-
-        Set<Menu> menus = new HashSet<>();
-        for (Role role : userRoles) {
-            menus.addAll(menuRepository.findAllByRole(role));
-        }
-
-        return ResponseEntity.ok(new JwtResponse(jwt, userDetails.getId(), userDetails.getUsername(), userDetails.getEmail(), roles, menus));
+        return ResponseEntity.ok(jwtTokenResponse);
     }
 
     @PostMapping("/signup")
