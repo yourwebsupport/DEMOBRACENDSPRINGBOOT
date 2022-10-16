@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -47,8 +48,13 @@ public class UserService {
         return jwt;
     }
 
-    public UserResponse getUser(JwtRequest jwtRequest) {
-        String username = jwtUtils.getUserNameFromJwtToken(jwtRequest.getToken());
+    public UserResponse getUser() {
+
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication()
+                .getPrincipal();
+        String username = userDetails.getUsername();
+
+//        String username = jwtUtils.getUserNameFromJwtToken(jwtRequest.getToken());
         User user = userRepository.findByUsername(username).get();
         Set<Role> userRoles = user.getRoles();
         List<String> roles = userRoles.stream().map(i -> i.getName().name()).collect(Collectors.toList());

@@ -39,9 +39,10 @@ public class UserController {
     UserService userService;
 
     @GetMapping("/user")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody JwtRequest jwtRequest) {
+    public ResponseEntity<?> authenticateUser() {
 
-        UserResponse userResponse = userService.getUser(jwtRequest);
+
+        UserResponse userResponse = userService.getUser();
 
         return ResponseEntity.ok(userResponse);
     }
