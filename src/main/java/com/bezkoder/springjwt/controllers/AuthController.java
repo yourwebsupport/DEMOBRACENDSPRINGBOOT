@@ -1,23 +1,19 @@
 package com.bezkoder.springjwt.controllers;
 
-import java.util.ArrayList;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
 
 import javax.validation.Valid;
 
-import com.bezkoder.springjwt.models.Menu;
+
 import com.bezkoder.springjwt.payload.response.JwtTokenResponse;
 import com.bezkoder.springjwt.repository.MenuRepository;
 import com.bezkoder.springjwt.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,12 +22,11 @@ import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.payload.request.LoginRequest;
 import com.bezkoder.springjwt.payload.request.SignupRequest;
-import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
 import com.bezkoder.springjwt.repository.RoleRepository;
 import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
-import com.bezkoder.springjwt.security.services.UserDetailsImpl;
+
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
 @RestController
@@ -92,7 +87,8 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()));
+        User user = new User(signUpRequest.getUsername(), signUpRequest.getEmail(), encoder.encode(signUpRequest.getPassword()),
+                signUpRequest.getFullName(), signUpRequest.getMobileNo(), signUpRequest.getOccupation());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -124,24 +120,5 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-    }
-
-    @PostMapping("/account")
-    public ResponseEntity<?> getUser() {
-//    if (userRepository.existsByUsername(signUpRequest.getUsername())) {
-//      return ResponseEntity
-//              .badRequest()
-//              .body(new MessageResponse("Error: Username is already taken!"));
-//    }
-//
-//    if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-//      return ResponseEntity
-//              .badRequest()
-//              .body(new MessageResponse("Error: Email is already in use!"));
-//    }
-
-        // Create new user's account
-        User user = new User("Habib", "ahsancseo3@gmail.com", "password");
-        return ResponseEntity.ok(user);
     }
 }

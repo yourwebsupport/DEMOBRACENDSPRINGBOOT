@@ -14,7 +14,10 @@ import java.util.Set;
 public class UserResponse {
     private Long id;
     private String username;
+    private String fullName;
+    private String mobileNo;
     private String email;
+    private String occupation;
     private List<String> roles;
     private Set<Menu> menus;
 }
