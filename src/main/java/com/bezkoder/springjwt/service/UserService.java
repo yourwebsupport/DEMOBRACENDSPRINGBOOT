@@ -71,6 +71,9 @@ public class UserService {
                 .email(user.getEmail())
                 .roles(roles)
                 .menus(menus)
+                .fullName(user.getFullName())
+                .mobileNo(user.getMobileNo())
+                .occupation(user.getOccupation())
                 .build();
 
         return userResponse;
