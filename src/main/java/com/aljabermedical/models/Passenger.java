@@ -33,13 +33,14 @@ public class Passenger {
 
     @NotBlank
     @Size(max = 200)
-    private String matherName;
+    private String motherName;
 
     private Long countryId;
 
-    private Date DOB;
+    private Date dateOfBirth;
     private Long genderId;
-
+    private Long maritalStatusId;
+    private Long bloodGroupId;
     private String weight;
     private String height;
     private String profession;
@@ -53,6 +54,7 @@ public class Passenger {
     private String visaPhoto;
     private String agencyName;
     private String executiveName;
+    private String remarks;
     private Integer statusId;
     private Integer medicalStatusId;
     private Long domainStatusId;

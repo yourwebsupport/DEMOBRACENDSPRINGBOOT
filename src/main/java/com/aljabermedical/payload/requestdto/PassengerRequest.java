@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.util.Date;
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class PassengerRequest {
@@ -14,9 +15,11 @@ public class PassengerRequest {
     private String registrationNo;
     private String name;
     private String fatherName;
-    private String matherName;
+    private String motherName;
+    private Long maritalStatusId;
+    private Long bloodGroupId;
     private Long countryId;
-    private Date DOB;
+    private Date dateOfBirth;
     private Long genderId;
     private String weight;
     private String height;
@@ -30,5 +33,7 @@ public class PassengerRequest {
     private String passportPhoto;
     private String visaPhoto;
     private String agencyName;
+    private String executiveName;
+    private String remarks;
 
 }

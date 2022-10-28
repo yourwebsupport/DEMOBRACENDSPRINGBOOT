@@ -8,9 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600, allowCredentials = "true")
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api")
 public class PassengerController {
@@ -20,7 +23,17 @@ public class PassengerController {
 
     @PostMapping("/save")
     public ResponseEntity<?> registerPassenger(@Valid @RequestBody PassengerRequest request) {
+
+        Date currentDate = new Date();
+        LocalDate localDate = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        String refNo = "BD/"+localDate.getYear()+"/AJ-"+passengerService.getTotalCountPassenger();
+        request.setRegistrationNo(refNo);
+
+//        if (passengerService.existsByRegistrationNo(request.getRegistrationNo())) {
+//            return ResponseEntity.badRequest().body(new MessageResponse("Error: Registration No"+ refNo +" is already taken!"));
+//        }
+
         passengerService.createPassenger(request);
-        return ResponseEntity.ok(new MessageResponse("Passenger registered successfully!"));
+        return ResponseEntity.ok(new MessageResponse("Passenger registered successfully! Registration No "+refNo+""));
     }
 }
