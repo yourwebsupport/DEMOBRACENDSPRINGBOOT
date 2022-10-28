@@ -1,7 +1,10 @@
 package com.aljabermedical.service;
 
 import com.aljabermedical.models.Passenger;
+import com.aljabermedical.models.PassengerMedicalDetails;
+import com.aljabermedical.payload.requestdto.PassengerMedicalDetailsRequest;
 import com.aljabermedical.payload.requestdto.PassengerRequest;
+import com.aljabermedical.repository.PassengerMedicalDetailsRepository;
 import com.aljabermedical.repository.PassengerRepository;
 import com.aljabermedical.util.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,9 @@ import java.util.List;
 public class PassengerServiceImpl implements PassengerService {
     @Autowired
     PassengerRepository passengerRepository;
+
+    @Autowired
+    PassengerMedicalDetailsRepository passengerMedicalDetailsRepository;
 
     @Override
     public void createPassenger(PassengerRequest request){
@@ -46,6 +52,13 @@ public class PassengerServiceImpl implements PassengerService {
                 .medicalStatusId(CommonConstant.MEDICAL_STATUS_UNDEFINED)
                 .build();
         passengerRepository.save(passenger);
+
+        PassengerMedicalDetails medicalDetails = PassengerMedicalDetails.builder()
+               .passengerId(passenger.getId())
+                .bloodPressure(request.getBloodPressure())
+               .build();
+         passengerMedicalDetailsRepository.save(medicalDetails);
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.aljabermedical.controllers;
 
+import com.aljabermedical.payload.requestdto.PassengerMedicalDetailsRequest;
 import com.aljabermedical.payload.requestdto.PassengerRequest;
 import com.aljabermedical.payload.responsedto.MessageResponse;
 import com.aljabermedical.service.PassengerService;
