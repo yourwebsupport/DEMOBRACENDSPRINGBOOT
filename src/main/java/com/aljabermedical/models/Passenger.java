@@ -1,8 +1,6 @@
 package com.aljabermedical.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -14,6 +12,8 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,29 +65,4 @@ public class Passenger {
 //            joinColumns = @JoinColumn(name = "passenger_id"),
 //            inverseJoinColumns = @JoinColumn(name = "country_id"))
 
-
-    public Long getId() {return id;}
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRegistrationNo() {return registrationNo;}
-    public void setRegistrationNo(String registrationNo) {
-        this.registrationNo = registrationNo;
-    }
-
-    public String getName() {return name;}
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setFatherName(String fatherName) {this.fatherName = fatherName;}
-    public String getFatherName() {return fatherName;}
-
-    public void setMatherName(String matherName) {this.matherName = matherName;}
-    public String getMatherName() {return matherName;}
-
-    public void setDomainStatusId(Long domainStatusId) {this.domainStatusId = domainStatusId;}
-
-    public Long getDomainStatusId() {return domainStatusId;}
 }

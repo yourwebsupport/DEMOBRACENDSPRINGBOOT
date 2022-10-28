@@ -5,7 +5,9 @@ import com.aljabermedical.payload.requestdto.PassengerRequest;
 import com.aljabermedical.repository.PassengerRepository;
 import com.aljabermedical.util.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PassengerServiceImpl implements PassengerService {
     @Autowired
     PassengerRepository passengerRepository;
@@ -21,7 +23,7 @@ public class PassengerServiceImpl implements PassengerService {
                 .email(request.getEmail())
                 .mobileNo(request.getMobileNo())
                 .countryId(request.getCountryId())
-                .genderId(request.getGender())
+                .genderId(request.getGenderId())
                 .weight(request.getWeight())
                 .height(request.getHeight())
                 .passportNo(request.getPassportNo())
