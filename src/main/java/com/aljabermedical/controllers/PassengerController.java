@@ -28,9 +28,9 @@ public class PassengerController {
         Date currentDate = new Date();
         LocalDate localDate = currentDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         String refNo = "BD/"+localDate.getYear()+"/AJ-"+passengerService.getTotalCountPassenger();
-        request.setRegistrationNo(refNo);
+        request.setCode(refNo);
 
-//        if (passengerService.existsByRegistrationNo(request.getRegistrationNo())) {
+//        if (passengerService.existsByCode(request.setCode())) {
 //            return ResponseEntity.badRequest().body(new MessageResponse("Error: Registration No"+ refNo +" is already taken!"));
 //        }
 

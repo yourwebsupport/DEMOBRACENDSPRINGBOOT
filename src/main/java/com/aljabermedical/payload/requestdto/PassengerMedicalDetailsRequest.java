@@ -1,5 +1,6 @@
 package com.aljabermedical.payload.requestdto;
 
+import com.aljabermedical.models.Pregnancy;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,29 +14,37 @@ import java.util.Date;
 @NoArgsConstructor
 public class PassengerMedicalDetailsRequest {
     private Long passengerId;
-    private Date dateOfExam;
-    private long medicalExamType;
-    private String bloodPressure;
-    private String haemoglobin;
-    private String bilirubin;
-    private String sgpt;
-    private String sgot ;
-    private Long pregnancyId;
-    private String pulse;
-    private String esr ;
-    private String tc;
-    private String neutrophils;
-    private String lymphocytes ;
-    private String monocytes ;
-    private String basophils ;
-    private String eosinophils;
-    private String sugarRandom ;
-    private String urea ;
-    private String creatinine ;
-    private String ent ;
-    private String skin ;
-    private String albumin ;
-    private String ecg ;
-    private Long domainStatusId;
-    private Integer medicalStatusId;
+    private Date medicalExamDate;
+    private long medicalExamTypeId;
+    private Double bp;
+    private Double pulse;
+    private Double weight;
+    private Double height;
+    private Pregnancy pregnancy;
+    private Double haemoglobin;
+    private Double bilirubin;
+    private Double sgpt;
+    private Double sgot ;
+
+    private Double esr ;
+    private Double tc;
+    private Double neutrophils;
+    private Double lymphocytes ;
+    private Double monocytes ;
+    private Double basophils ;
+    private Double eosinophils;
+    private Double sugarRandom ;
+    private Double urea ;
+    private Double creatinine;
+    private Double ent;
+    private Double skin;
+    private Double albumin;
+    private Double ecg;
+    private Long statusId;
+    private Long medicalResultId;
+
+    private Long createdBy;
+    private Long updatedBy;
+    private Date createdDate;
+    private Date updatedDate;
 }

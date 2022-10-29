@@ -9,12 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 @Repository
 public interface PassengerRepository extends JpaRepository<Passenger, Long>, JpaSpecificationExecutor<Passenger> {
-
-    Optional<Passenger> findByRegistrationNo(String registrationNo);
-    Boolean existsByRegistrationNo(String registrationNo);
+    Boolean existsByCode(String code);
 
     String COUNT_STRING = """
-            SELECT count(*) FROM passenger
+            SELECT count(*) FROM passenger_info
             """;
 
 
