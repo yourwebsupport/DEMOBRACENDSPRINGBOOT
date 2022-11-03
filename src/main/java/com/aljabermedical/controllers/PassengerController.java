@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.awt.print.Printable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -43,11 +42,6 @@ public class PassengerController {
     @GetMapping("/list")
     public List<PassengerResponse> getPassengerList() {
         return passengerService.getPassengerList();
-    }
-
-    @PostMapping("/saveVendor")
-    public void SaveVendor() {
-        System.out.print("first statement. ");
     }
 
 }
