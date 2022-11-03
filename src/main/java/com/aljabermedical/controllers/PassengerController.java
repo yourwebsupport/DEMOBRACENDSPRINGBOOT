@@ -1,7 +1,7 @@
 package com.aljabermedical.controllers;
 
-import com.aljabermedical.payload.requestdto.PassengerMedicalDetailsRequest;
 import com.aljabermedical.payload.requestdto.PassengerRequest;
+import com.aljabermedical.payload.responsedto.PassengerResponse;
 import com.aljabermedical.payload.responsedto.MessageResponse;
 import com.aljabermedical.service.PassengerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.awt.print.Printable;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.List;
 
 
 @CrossOrigin("*")
@@ -37,4 +39,15 @@ public class PassengerController {
         passengerService.createPassenger(request);
         return ResponseEntity.ok(new MessageResponse("Passenger registered successfully! Registration No "+refNo+""));
     }
+
+    @GetMapping("/list")
+    public List<PassengerResponse> getPassengerList() {
+        return passengerService.getPassengerList();
+    }
+
+    @PostMapping("/saveVendor")
+    public void SaveVendor() {
+        System.out.print("first statement. ");
+    }
+
 }

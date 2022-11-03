@@ -4,11 +4,14 @@ import com.aljabermedical.models.Passenger;
 import com.aljabermedical.models.PassengerMedicalDetails;
 import com.aljabermedical.models.Pregnancy;
 import com.aljabermedical.payload.requestdto.PassengerRequest;
+import com.aljabermedical.payload.responsedto.PassengerResponse;
 import com.aljabermedical.repository.PassengerMedicalDetailsRepository;
 import com.aljabermedical.repository.PassengerRepository;
 import com.aljabermedical.util.CommonConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service
@@ -95,8 +98,9 @@ public class PassengerServiceImpl implements PassengerService {
         return passengerRepository.getTotalCountPassenger();
     }
 
+
     @Override
-    public Boolean existsByCode(String code){
-        return passengerRepository.existsByCode(code);
+    public List<PassengerResponse> getPassengerList() {
+        return passengerRepository.getPassengerList();
     }
 }
