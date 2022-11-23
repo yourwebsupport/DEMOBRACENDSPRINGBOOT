@@ -39,7 +39,7 @@ public class PassengerController {
         return ResponseEntity.ok(new MessageResponse("Passenger registered successfully! Registration No "+refNo+""));
     }
 
-    @GetMapping("/list")
+    @GetMapping("/passenger-list")
     public List<PassengerResponse> getPassengerList() {
         return passengerService.getPassengerList();
     }

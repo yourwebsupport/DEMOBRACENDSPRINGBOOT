@@ -26,7 +26,7 @@ public interface PassengerRepository extends JpaRepository<Passenger, Long>, Jpa
             pi.visa_no  "visaNo",
             pi.registration_date "registrationDate",
             pmr.medical_exam_date "medicalExamDate",
-            CONCAT(rc.medical_exam_type, "  ->  ", rc.rate) "medicalExamType",
+            CONCAT(rc.medical_exam_type, "  ->  ", rc.rate, " BDT") "medicalExamType",
             aus.status "authorizationStatusName",
             mr.result "medicalResultStatusName"
             FROM passenger_info pi
@@ -34,7 +34,10 @@ public interface PassengerRepository extends JpaRepository<Passenger, Long>, Jpa
             LEFT JOIN ratecard rc ON (pmr.medical_exam_type_id = rc.id)
             INNER JOIN authorization_status aus ON (aus.id = pi.authorization_status_id)
             LEFT JOIN medical_result mr ON (mr.id = pi.medical_result_id)
+            ORDER BY pi.id DESC
             """;
     @Query(value = PASSENGER_STRING, nativeQuery = true)
     List<PassengerResponse> getPassengerList();
+
+
 }

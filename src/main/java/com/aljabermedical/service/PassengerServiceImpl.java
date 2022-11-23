@@ -1,10 +1,10 @@
 package com.aljabermedical.service;
 
-import com.aljabermedical.models.Passenger;
-import com.aljabermedical.models.PassengerMedicalDetails;
-import com.aljabermedical.models.Pregnancy;
+import com.aljabermedical.models.*;
 import com.aljabermedical.payload.requestdto.PassengerRequest;
 import com.aljabermedical.payload.responsedto.PassengerResponse;
+import com.aljabermedical.repository.CountryRepository;
+import com.aljabermedical.repository.GenderRepository;
 import com.aljabermedical.repository.PassengerMedicalDetailsRepository;
 import com.aljabermedical.repository.PassengerRepository;
 import com.aljabermedical.util.CommonConstant;
@@ -21,6 +21,12 @@ public class PassengerServiceImpl implements PassengerService {
 
     @Autowired
     PassengerMedicalDetailsRepository passengerMedicalDetailsRepository;
+
+    @Autowired
+    CountryRepository countryRepository;
+
+    @Autowired
+    GenderRepository genderRepository;
 
     @Override
     public void createPassenger(PassengerRequest request){
@@ -98,9 +104,14 @@ public class PassengerServiceImpl implements PassengerService {
         return passengerRepository.getTotalCountPassenger();
     }
 
-
     @Override
     public List<PassengerResponse> getPassengerList() {
         return passengerRepository.getPassengerList();
+    }
+    public List<Country> getAllCountryList() {
+        return countryRepository.findAll();
+    }
+    public List<Gender> getAllGenderList() {
+        return genderRepository.findAll();
     }
 }
